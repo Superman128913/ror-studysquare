@@ -1,0 +1,10 @@
+language: ruby
+rvm:
+  - 2.1.2
+cache:
+  - bundler
+addons:
+  postgresql: "9.3"
+before_script:
+  - psql -c 'create database studysquare_test;' -U postgres
+  - RACK_ENV=test bundle exec rake db:test:prepare

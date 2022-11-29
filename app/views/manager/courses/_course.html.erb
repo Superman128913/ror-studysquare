@@ -1,0 +1,36 @@
+<%= content_tag :tr, class: course.availability, data: { url: manager_course_path(course) } do %>
+  <td>
+    <abbr title="Zichtbaar op publieke site">
+      <i class="<%= 'icon-eye-open' if course.visible %>"></i>
+    </abbr>
+
+    <%= link_to "##{course.id}", [:manager, course] %>
+  </td>
+  <td>
+    <% if course.cash? %>
+      <abbr title="<%= t "attributes.cash" %>">
+        <i class="icon-briefcase pull-right"></i>
+      </abbr>
+    <% end %>
+
+    <% if course.program_course %>
+      <% if course.program_course.faculty_programs %>
+        <% if course.program_course.faculty_programs.first %>
+          <strong>
+            <%= course.program_course.faculty_programs.first.institute %>
+          </strong>
+        <% end %>
+      <% end %>
+      <%= course.program_course.name %>
+    <% end %>
+  </td>
+  <td><%= course.course_type.name %></td>
+  <td class="right"><%= l course.starts_at, format: :date %></td>
+  <td class="right"><%= course.group %></td>
+  <td class="right">
+    <%=raw '<abbr title="Turbo">&#10004;</abbr> ' if course.turbo %>
+    <%= course.occupancy %>
+  </td>
+  <td class="right"><%= time_ago_in_words course.updated_at %> geleden</td>
+<% end %>
+

@@ -1,0 +1,6 @@
+<%#= render 'faculty_programs/header' %>
+
+<%= render 'scopes', collection: @faculty_program.program_courses.where(active: true),
+  url: lambda {|obj| [@institute, @faculty, @faculty_program, obj, :courses] },
+  current: @program_course %>
+

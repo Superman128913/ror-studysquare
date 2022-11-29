@@ -1,0 +1,20 @@
+<%%= title "<%= plural_table_name %>" %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+  <% attributes.each do |attribute| -%>
+      <th><%= attribute.human_name %></th>
+  <% end -%>
+    </tr>
+  </thead>
+
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <tr>
+<% attributes.each do |attribute| -%>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+  </tr>
+<%% end %>
+</table>
+

@@ -1,0 +1,12 @@
+was:
+  name: Wiskunde en Statistiek
+  acronym: WAS
+  year: 1
+  faculty_programs: [eeb]
+
+stat1:
+  name: Statistiek 1
+  acronym: STAT1
+  year: 1
+  faculty_programs: [ped]
+

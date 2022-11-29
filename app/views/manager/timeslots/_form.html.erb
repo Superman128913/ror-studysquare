@@ -1,0 +1,19 @@
+<%= render 'manager/courses/header' %>
+
+<%= simple_form_for [:manager, @timeslot] do |f| %>
+  <%= f.association :course, as: :hidden %>
+  <%= f.input :starts_at %>
+
+  <% if @timeslot.ends_at %>
+    <%= f.input :ends_at %>
+  <% else %>
+    <%= f.input :duration, as: :float %>
+  <% end %>
+
+  <%= f.input :location %>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

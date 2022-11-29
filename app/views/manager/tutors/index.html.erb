@@ -1,0 +1,48 @@
+<div class="well well-small">
+  <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= @year %>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% (Date.today.ago(5.years).year..Date.today.year).each do |year| %>
+        <li><%= link_to year, params.merge(year: year) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <% months = t('date.month_names') %>
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= months[@month] %>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% 1.upto(12).each do |month| %>
+        <li><%= link_to months[month], params.merge(month: month) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th style="min-width: 150px">Naam</th>
+      <th>Tijdvakken</th>
+      <th class="right">Uren</th>
+    </tr>
+  </thead>
+  <% @tutors.each do |tutor| %>
+    <tr>
+      <td><%= tutor.id %></td>
+      <td><a href="/admin/tutor/<%= tutor.id %>"><%= tutor %></a></td>
+      <td><%=raw(tutor.timeslots.month(@date).map do |timeslot|
+        link_to timeslot, "/admin/timeslot/#{timeslot.id}"
+      end.join ', ') %></td>
+      <td class="right"><%= tutor.billable_hours(@date) %></td>
+    </tr>
+  <% end %>
+
+</table>
+

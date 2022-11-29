@@ -1,0 +1,98 @@
+.checkout .main-kortingscode {
+  margin-top:40px;
+}
+
+.checkout .main-kortingscode .btn.btn-primary {
+  margin-right:0px;
+}
+
+.checkout .control-group {
+  margin-bottom: 0px;
+}
+
+.checkout .form-vertical {
+  margin-bottom: 0px;
+}
+
+.checkout hr {
+  margin: 10px 0;
+}
+
+.checkout {
+  height: auto;
+  font-size: 12px;
+}
+
+.checkout .span4 {
+  min-height: 100%;
+  width: 34%;
+}
+
+.checkout .span4.middle {
+  width: 27%;
+}
+
+.checkout .table td {
+  padding: 8px 5px;
+}
+
+.checkout label {
+  font-size: 13px;
+}
+
+.checkout .inline .control-group {
+  width: 45%;
+  float: left;
+}
+
+.checkout .inline .control-group input {
+  width: 90%;
+  border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  font-size: 12px;
+  height: 17px;
+  line-height: 17px;
+  margin-bottom: 4px;
+}
+
+.checkout .inline .last .control-group {
+  margin-left: 4%;
+}
+
+.checkout .inline .control-group select {
+  width: 100%;
+  height: 28px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.checkout legend {
+  font-size: 15px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  margin: 8px 0px;
+  line-height: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.checkout label.radio {
+  padding-left: 48px;
+  background: no-repeat 17px 0px;
+  min-height:22px
+}
+
+.checkout label.radio.issuer-abnanl2a { background-image: url('/assets/icon_abn.gif'); }
+.checkout label.radio.issuer-asnbnl21 { background-image: url('/assets/icon_asn.gif'); }
+.checkout label.radio.issuer-frbknl2l { background-image: url('/assets/icon_frieslandbank.gif'); }
+.checkout label.radio.issuer-ingbnl2a { background-image: url('/assets/icon_ing.gif'); }
+.checkout label.radio.issuer-knabnl2h { background-image: url('/assets/icon_knab.gif'); }
+.checkout label.radio.issuer-rabonl2u { background-image: url('/assets/icon_rabobank.gif'); }
+.checkout label.radio.issuer-rbrbnl21 { background-image: url('/assets/icon_sns-1.gif'); }
+.checkout label.radio.issuer-snsbnl2a { background-image: url('/assets/icon_sns.gif'); }
+.checkout label.radio.issuer-trionl2u { background-image: url('/assets/icon_triodos.gif'); }
+.checkout label.radio.issuer-fvlbnl22 { background-image: url('/assets/icon_vanLanschot.gif'); }
+
+
+.checkout label.radio input[type="radio"] {
+  margin-left: -48px;
+}

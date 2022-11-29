@@ -1,0 +1,5 @@
+<% title "Tutorial" %>
+<div class="tutorial">
+<%=raw Redcarpet::Markdown.new(Redcarpet::Render::HTML).
+  render(render(file: 'pages/manager/tutorial.md')) %>
+</div>

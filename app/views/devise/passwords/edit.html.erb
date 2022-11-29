@@ -1,0 +1,12 @@
+<%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), method: 'put', html: { class: 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :reset_password_token, as: :hidden %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Wachtwoord veranderen</button>
+  </div>
+<% end %>
+

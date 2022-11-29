@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= stylesheet_link_tag "application" %>
+    <style>
+      h1 {
+        margin: 50px;
+        text-align: center;
+        color: #bbb;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%= form_tag @request.gateway_url do %>
+      <% @request.parameters.each do |name, value| %>
+        <%= hidden_field_tag name, value %>
+      <% end %>
+
+      <noscript>
+        <%= submit_tag 'Klik hier om te betalen' %>
+      </noscript>
+    <% end %>
+
+    <%= javascript_include_tag "application" %>
+    <script>
+      $('form').submit()
+      $('body').append("<h1>U wordt doorgestuurd...</h1>")
+    </script>
+  </body>
+</html>
+

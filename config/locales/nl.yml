@@ -1,0 +1,352 @@
+nl:
+  # Cursus
+  future: Ingeschreven
+  active: Actief
+  finished: Afgelopen
+
+  availability:
+    success: Genoeg plaatsen
+    warning: Bijna vol
+    error: Laatste plaatsen
+    full: Vol
+
+  attributes:
+    created_at: Aangemaakt
+    updated_at: Bijgewerkt
+    name: Naam
+    high_school: Middelbare School
+    acronym: Afkorting
+    course: Cursus
+    courses: Cursussen
+    user: Gebruiker
+    discount: Korting
+    price: Prijs
+    capacity: Capaciteit
+    occupancy: Bezetting
+    billable_hours_summary: Gewerkte uren (per maand)
+    student_number: Studentnummer
+    institute: Instituut
+    faculty: Faculteit
+    faculties: Faculteiten
+    faculty_program: Opleiding
+    faculty_programs: Opleidingen
+    program_courses: Vakken
+    program_course: Vak
+    revenue: Omzet
+    amount: Bedrag/percentage
+    payed: Betaald
+    registrations: Inschrijvingen
+    group: Groep
+    to_s: Referentie
+    subtotal: Subtotaal
+    total: Totaal
+    id: "#"
+    coupon_discount: Korting
+    location: Locatie
+    telephone: Telefoon
+    address_street: Straat
+    address_number: Nummer
+    address_zip: Postcode
+    address_residence: Plaats
+    users: Gebruikers
+    visible: Publiek
+    max_uses: Gebruikslimiet
+    usage: Gebruik
+    order: Bestelling
+    orders: Bestellingen
+    sign_in_count: Aantal keer ingelogd
+    customers: Klanten
+    customer: Klant
+    cost: Kosten
+    costs: Kosten
+    profit: Winst
+    cash: Betaling bij aanvang
+    address_1: Adresregel 1
+    address_2: Adresregel 2
+    subject: Onderwerp
+    body: Inhoud
+    messageable: Filter
+    course_type: Cursustype
+    timeslots: Tijdvakken
+    description: Omschrijving
+    active: Actief
+    expires_at: Geldig tot en met
+    kind: Soort
+    starts_at: Begint
+    ends_at: Eindigt
+    duration: Cursusduur (in uren)
+
+  activerecord:
+    attributes: &attributes
+      user:
+        first_name: Voornaam
+        insertion: Tussenvoegsel
+        last_name: Achternaam
+        email: E-mail
+        password: Wachtwoord
+        password_confirmation: Bevestiging
+        current_password: Huidig wachtwoord
+        role: Rol
+    models:
+      faculty:
+        one: Faculteit
+        other: Faculteiten
+      program_course:
+        one: Vak
+        other: Vakken
+      user:
+        one: Gebruiker
+        other: Gebruikers
+      course:
+        one: Cursus
+        other: Cursussen
+      institute:
+        one: Instituut
+        other: Instituties
+      timeslot:
+        one: Tijdvak
+        other: Tijdvakken
+      faculty_program:
+        one: Opleiding
+        other: Opleidingen
+      registration:
+        one: Inschrijving
+        other: Inschrijvingen
+      order:
+        one: Bestelling
+        other: Bestellingen
+      customer:
+        one: Klant
+        other: Klanten
+      tutor:
+        one: Tutor
+        other: Tutoren
+      manager:
+        one: Manager
+        other: Managers
+      admin:
+        one: Admin
+        other: Admins
+      cost:
+        one: Kostenpost
+        other: Kostenposten
+      message:
+        one: E-mail
+        other: E-mails
+      course_type:
+        one: Cursustype
+        other: Cursustypes
+
+  simple_form:
+    labels:
+      <<: *attributes
+
+  views:
+    pagination:
+      first: Eerste
+      previous: Vorige
+      next: Volgende
+      last: Laatste
+
+  date:
+    abbr_day_names:
+    - zon
+    - maa
+    - din
+    - woe
+    - don
+    - vri
+    - zat
+    abbr_month_names:
+    -
+    - jan
+    - feb
+    - mar
+    - apr
+    - mei
+    - jun
+    - jul
+    - aug
+    - sep
+    - okt
+    - nov
+    - dec
+    day_names:
+    - zondag
+    - maandag
+    - dinsdag
+    - woensdag
+    - donderdag
+    - vrijdag
+    - zaterdag
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%e %B %Y'
+      short: ! '%e %b'
+    month_names:
+    -
+    - januari
+    - februari
+    - maart
+    - april
+    - mei
+    - juni
+    - juli
+    - augustus
+    - september
+    - oktober
+    - november
+    - december
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: ongeveer een uur
+        other: ongeveer %{count} uur
+      about_x_months:
+        one: ongeveer een maand
+        other: ongeveer %{count} maanden
+      about_x_years:
+        one: ongeveer een jaar
+        other: ongeveer %{count} jaar
+      almost_x_years:
+        one: bijna een jaar
+        other: bijna %{count} jaar
+      half_a_minute: een halve minuut
+      less_than_x_minutes:
+        one: minder dan een minuut
+        other: minder dan %{count} minuten
+      less_than_x_seconds:
+        one: minder dan een seconde
+        other: minder dan %{count} seconden
+      over_x_years:
+        one: meer dan een jaar
+        other: meer dan %{count} jaar
+      x_days:
+        one: 1 dag
+        other: ! '%{count} dagen'
+      x_minutes:
+        one: 1 minuut
+        other: ! '%{count} minuten'
+      x_months:
+        one: 1 maand
+        other: ! '%{count} maanden'
+      x_seconds:
+        one: 1 seconde
+        other: ! '%{count} seconden'
+    prompts:
+      day: dag
+      hour: uur
+      minute: minuut
+      month: maand
+      second: seconde
+      year: jaar
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: moet worden geaccepteerd
+      blank: moet opgegeven zijn
+      confirmation: komt niet met de bevestiging overeen
+      empty: moet opgegeven zijn
+      equal_to: moet gelijk zijn aan %{count}
+      even: moet even zijn
+      exclusion: is niet beschikbaar
+      greater_than: moet groter zijn dan %{count}
+      greater_than_or_equal_to: moet groter dan of gelijk zijn aan %{count}
+      inclusion: is niet in de lijst opgenomen
+      invalid: is ongeldig
+      less_than: moet minder zijn dan %{count}
+      less_than_or_equal_to: moet minder dan of gelijk zijn aan %{count}
+      not_a_number: is geen getal
+      not_an_integer: moet een geheel getal zijn
+      odd: moet oneven zijn
+      record_invalid: ! 'Validatie mislukt: %{errors}'
+      taken: is al in gebruik
+      too_long: is te lang (maximaal %{count} tekens)
+      too_short: is te kort (minimaal %{count} tekens)
+      wrong_length: heeft onjuiste lengte (moet %{count} tekens lang zijn)
+    template:
+      body: ! 'Controleer de volgende velden:'
+      header:
+        one: ! '%{model} niet opgeslagen: 1 fout gevonden'
+        other: ! '%{model} niet opgeslagen: %{count} fouten gevonden'
+  helpers:
+    select:
+      prompt: Selecteer
+    submit:
+      create: ! '%{model} toevoegen'
+      submit: ! '%{model} opslaan'
+      update: ! '%{model} bewaren'
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u%n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: €
+    format:
+      delimiter: .
+      precision: 2
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: miljard
+          million: miljoen
+          quadrillion: biljard
+          thousand: duizend
+          trillion: biljoen
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ' en '
+      two_words_connector: ! ' en '
+      words_connector: ! ', '
+  time:
+    am: ! '''s ochtends'
+    formats:
+      #default: ! '%a %d %b %Y %H:%M:%S %Z'
+      default: ! '%a %d %b %Y %H:%M'
+      long: ! '%d %B %Y %H:%M'
+      short: ! '%a %d %b %H:%M'
+      long_date: ! '%d %B %Y'
+      date: ! '%a %d %B'
+      time: '%H:%M'
+    pm: ! '''s middags'
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  #activemodel:
+    #errors:
+      #<<: *errors
+  #activerecord:
+    #errors:
+      #<<: *errors

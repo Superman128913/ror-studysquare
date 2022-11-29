@@ -1,0 +1,12 @@
+january-5:
+  starts_at: <%= Time.new 2013, 1, 5, 10 %>
+  ends_at: <%= Time.new 2013, 1, 5, 18 %>
+  location: HG-02A06
+  course: superstoom_was
+
+january-7:
+  starts_at: <%= Time.new 2013, 1, 7, 16 %>
+  ends_at: <%= Time.new 2013, 1, 7, 20 %>
+  location: HG 0G30
+  course: tweeweekse_stat1
+

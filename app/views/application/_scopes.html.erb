@@ -1,0 +1,5 @@
+<% collection.each do |obj| %>
+  <% css_class = "active" if [@institute, @faculty, @faculty_program, @program_course].include? obj %>
+  <li><%= link_to obj.name, url.call(obj), class: css_class %></li>
+<% end %>
+

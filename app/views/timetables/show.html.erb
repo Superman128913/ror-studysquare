@@ -1,0 +1,42 @@
+<h1 style='text-align: center'>Rooster</h1>
+
+<p>
+<%= link_to "Rooster downloaden", timeslots_path(format: :ics, user_id: current_user), class: 'ical-btn btn btn-inverse btn-large' %>
+</p>
+
+<div class="row-fluid">
+  <div class="info-box timetable-box">
+    <h5>Rooster</h5>
+    <div class="inside-box">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Cursus</th>
+            <th>Datum</th>
+            <th>Tijd</th>
+            <th>Locatie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.timeslots.includes(course: [:program_course, :tutor]).
+            each do |timeslot| %>
+            <tr>
+              <td><%= timeslot.course.description(true) %></td>
+              <td><%= l timeslot.starts_at, format: :date %></td>
+              <td>
+                <%= l timeslot.starts_at, format: :time %> -
+                <%= l timeslot.ends_at, format: :time %>
+              </td>
+              <td><%= timeslot.location %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <% if current_user.timeslots.empty? %>
+        <p style="text-align: center; margin: 20px">Je hebt je nog niet ingeschreven voor een cursus. Klik <%= link_to "hier", institutes_path %> om het aanbod te bekijken.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+

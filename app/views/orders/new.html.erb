@@ -1,0 +1,105 @@
+<div class="row-fluid checkout">
+  <div id="authentication" class="span4 checkout-border">
+    
+    <% if current_user %>
+      <h3>Jouw gegevens</h3>
+      <p>
+        <%= current_user.name %><br>
+        <%= current_user.email %><br>
+        <%= current_user.telephone %>
+      </p>
+      <!-- <p>
+        <%= current_user.address_street %> <%= current_user.address_number %><br>
+        <%= current_user.address_zip %> <%= current_user.address_residence %><br>
+        Nederland
+      </p> -->
+      <p class="text-warning">
+        <strong><i class="icon-info-sign"></i> Gegevens incorrect?</strong><br>
+        Klik <%= link_to "hier", edit_user_registration_path %> om ze te wijzigen.
+      </p>
+    <% else %>
+      <div class="remote" data-url="<%= new_user_session_path %>"></div>
+
+      <hr>
+      <!-- <h2> Nog geen account? </h2>
+      <%= link_to "Registreer je hier.", new_user_registration_path, class: 'mobile-nav-link' %> -->
+      
+      <div class="remote" data-url="<%= new_user_registration_path %>"></div>
+
+
+     <% end %>
+  </div>
+
+  <%= form_tag orders_path do |f| %>
+    <div class="span4 checkout-border">
+      <h2>Betalingsmethode</h2>
+
+      <% if @cart.total_payment == 0 %>
+        <p>
+          <strong>Contante betaling</strong><br>
+          Je betaalt de prijs bij aanvang van de cursus. Je doet nu dus geen iDeal betaling.
+        </p>
+      <% end %>
+
+      <div class="<%= 'muted' if @cart.total_payment == 0 %>">
+        <p>
+          <strong>iDEAL</strong><br>
+          Selecteer hieronder jouw bank
+        </p>
+
+        <% Buckaroo::Ideal::BANKS.each do |id, name| %>
+          <label class="radio issuer-<%= id.downcase %>">
+            <input type="radio" name="issuer" value="<%= id %>"<%= ' disabled' if @cart.total_payment == 0 %>>
+            <%= name %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="span4">
+      <h2>Controleer je bestelling</h2>
+
+      <table class="table checkout-table">
+        <thead>
+          <tr>
+            <td>Vak</td>
+            <td class="right">Prijs</td>
+          </tr>
+        </thead>
+        <% @cart.courses.includes(:program_course).each do |course| %>
+          <tr>
+            <td><%= course.program_course.description %></td>
+            <td class="right"><%= "(contant) " if course.cash %><%= number_to_currency course.price %></td>
+          </tr>
+        <% end %>
+
+        <% if @cart.coupon %>
+          <tr>
+            <td class="right"><strong>Korting coupon:</strong></td>
+            <td class="right"><strong><%= number_to_currency @cart.coupon_discount %></strong></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td class="right checkout-total"><strong>Totaal:</strong></td>
+          <td class="right checkout-total"><strong><%= number_to_currency @cart.total_payment %></strong></td>
+        </tr>
+      </table>
+
+      <div class="clearfix">
+        <p class="pull-right">
+          <% label = @cart.total_payment > 0 ? 'Afrekenen' : 'Afronden' %>
+          <%= button_tag raw("#{label} &rarr;"), class: 'btn btn-large btn-success' %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="well well-small main-kortingscode clearfix pull-right">
+  <%= simple_form_for :coupon, url: new_order_path, method: :get, html: { class: 'form' } do |f| %>
+    <%= f.input :code, label: 'Kortingscode', required: false, input_html: { value: @cart.coupon, class: 'input-block-level' } %>
+    <%= f.submit "Gebruiken", class: 'btn btn-primary pull-right' %>
+  <% end %>
+</div>
+

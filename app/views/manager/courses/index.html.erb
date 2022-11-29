@@ -1,0 +1,55 @@
+<div class="well well-small clearfix">
+  <%= link_to new_manager_course_path, class: 'btn btn-success pull-left extra-visible' do %>
+    <i class="icon-plus icon-white"></i> Nieuwe cursus
+  <% end %>
+
+  <div class="btn-group pull-right">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= @course_type || "Alle cursustypes" %>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Alle cursustypes", params.merge(course_type_id: nil) %></li>
+      <% CourseType.all.each do |course_type| %>
+        <li><%= link_to course_type, params.merge(course_type_id: course_type) %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <% if current_user.role? :admin %>
+    <div class="btn-group pull-right" style="margin-right:10px;">
+      <button class="btn disabled"><i class="icon-search"></i></button>
+    </div>
+
+    <% @resources.each do |resources| %>
+      <div class="btn-group pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <%= @parents.pop %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <% resources.all.each do |resource| %>
+            <li><%= link_to resource, params.merge(scope_type: resource.class, scope_id: resource) %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th style="width: 50px">Cursus</th>
+      <th>Vak</th>
+      <th style="width: 90px">Type</th>
+      <th class="right" style="width: 100px">Start</th>
+      <th class="right" style="width: 40px">Groep</th>
+      <th class="right" style="width: 55px">Bezetting</th>
+      <th class="right" style="width: 110px">Laatste update</th>
+    </tr>
+  </thead>
+  <%= render @courses %>
+</table>
+

@@ -1,0 +1,19 @@
+superstoom_was:
+  program_course: was
+  course_type: superstoom
+  group: 1
+  capacity: 23
+  active: true
+  visible: true
+  price: 59.95
+
+tweeweekse_stat1:
+  program_course: stat1
+  course_type: 2weekse
+  group: 1
+  capacity: 17
+  active: true
+  visible: true
+  price: 99.95
+  cash: true
+

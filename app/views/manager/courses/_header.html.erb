@@ -1,0 +1,54 @@
+<h3>
+  <% if current_user.role? 'Manager' %>
+    <span class="pull-right muted"><%= number_to_currency @course.revenue %></span>
+  <% end %>
+
+  <%= link_to_unless params[:controller] == 'manager/courses' && params[:action] == 'show', @course.description, @course %> 
+  (<%= link_to "bewerken", [:edit, :manager, @course] %>)
+</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+    <dl class="dl-horizontal">
+      <dt>Vak</dt>
+      <dd><%= @course.program_course.name %></dd>
+
+      <dt>Groep</dt>
+      <dd><%= @course.group.empty? ? "-" : @course.group %></dd>
+
+      <dt>Bezetting</dt>
+      <dd><%= @course.occupancy %> <%=raw '<abbr title="Turbo">&#10004;</abbr> ' if @course.turbo %></dd>
+
+      <dt>Tutor</dt>
+      <dd><%= @course.tutor || "Geen" %></dd>
+
+      <dt>Prijs</dt>
+      <dd><%= number_to_currency @course.price %> <%= "(betaling bij aanvang)" if @course.cash %></dd>
+    </dl>
+  </div>
+
+  <div class="span6">
+    <strong>Tijdvakken</strong>
+
+    <ol>
+      <% @course.timeslots.delete_if(&:new_record?).each do |timeslot| %>
+        <li>
+          <%= link_to [:edit, :manager, timeslot] do %>
+            <%= l timeslot.starts_at, format: :short %>
+            - <%= l timeslot.ends_at, format: :short %>
+            @ <%= timeslot.location.present? ? timeslot.location : '?' %>
+          <% end %>
+        </li>
+      <% end %>
+
+      <li>
+        <%= link_to new_manager_course_timeslot_path(@course) do %>
+          <i class="icon-plus"></i> Tijdvak toevoegen
+        <% end %>
+      </li>
+    <ol>
+  </div>
+</div>
+
+<hr>
+

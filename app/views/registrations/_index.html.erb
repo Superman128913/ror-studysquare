@@ -1,0 +1,32 @@
+<span class="cart-icon special-item"><%= image_tag 'new-sc.png' %></span><%= content_tag :span, session[:cart].courses.length, class: "winkelwagen-counter2" if session[:cart] && session[:cart].courses.present? %><span class="caret cart-icon-caret"></span>	
+
+<div class="winkelwagen-container">
+<div class="winkelwagen-top">
+	<span class="cart-icon"><%= image_tag 'new-sc.png' %></span><%= content_tag :span, session[:cart].courses.length, class: "winkelwagen-counter" if session[:cart] && session[:cart].courses.present? %>	
+	<a class="cart-toggle btn">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</a>
+	<h4>Winkelmand</h4>
+</div>
+<div class="winkelwagen-fixed-height">
+  <% if session[:cart] && session[:cart].course_ids.present? %>
+  	<div class="inside">
+      <% session[:cart].courses.each do |course| %>
+        <div class="winkelwagen-item clearfix">
+  	      <%= link_to raw('<i class="icon-remove"></i>'), course_registration_path(course), method: :delete %>
+  	      <p><%= course.program_course.name %><br/>
+  	      <%= course.course_type.name %>
+  	      <%= raw "<br>Groep #{course.group}" if course.group %></p>
+  	      <p class="pull-right"><%= number_to_currency course.price %></p>
+        </div>
+  	  <% end %>
+  	</div>
+
+      <p class="pull-left total">Totaal: <%= number_to_currency session[:cart].total_payment %></p>
+      <%= link_to "Afrekenen", new_order_path, class: 'btn btn-primary afrekenen-button' %>
+            
+  <% end %>
+</div>
+</div>

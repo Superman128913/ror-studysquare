@@ -1,0 +1,12 @@
+uva:
+  name: Universiteit van Amsterdam
+  acronym: UvA
+  city: Amsterdam
+  level: WO
+
+vu:
+  name: Vrije Universiteit
+  acronym: VU
+  city: Amsterdam
+  level: WO
+

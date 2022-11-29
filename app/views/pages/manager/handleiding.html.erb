@@ -1,0 +1,5 @@
+<% title "Handleiding" %>
+<div class="handleiding">
+<%=raw Redcarpet::Markdown.new(Redcarpet::Render::HTML).
+  render(render(file: 'pages/manager/handleiding.md')) %>
+</div>

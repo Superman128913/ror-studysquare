@@ -1,0 +1,6 @@
+<%#= render 'faculties/header' %>
+
+<%= render 'scopes', collection: @faculty.faculty_programs,
+  url: lambda {|obj| [@institute, @faculty, obj, :program_courses] },
+  current: @faculty_program %>
+

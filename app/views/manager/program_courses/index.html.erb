@@ -1,0 +1,73 @@
+<div class="well well-small">
+  <%= link_to '/admin/program_course/new', class: 'btn btn-success pull-right' do %>
+    <i class="icon-plus icon-white"></i> Nieuw vak
+  <% end %>
+
+  <% if current_user.role? :admin %>
+  <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= @manager || "Alle vakken" %>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "Alle vakken", params.merge(manager_id: nil) %></li>
+      <% Manager.all.each do |manager| %>
+        <li><%= link_to manager, params.merge(manager_id: manager) %></li>
+      <% end %>
+    </ul>
+  </div>
+  |<% end %><div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= @year %>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% (Date.today.ago(5.years).year..Date.today.year).each do |year| %>
+        <li><%= link_to year, params.merge(year: year) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="btn-group">
+    <% months = t('date.month_names') %>
+    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= months[@month] %>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <% 1.upto(12).each do |month| %>
+        <li><%= link_to months[month], params.merge(month: month) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Vak</th>
+      <th class="right">Omzet</th>
+      <th class="right">Kosten</th>
+      <th class="right">Winst</th>
+    </tr>
+  </thead>
+  <%
+  @program_courses.includes(:timeslots).each do |program_course|
+    @revenue += revenue = program_course.revenue(@date)
+    @cost += cost = program_course.cost(@date)
+    @profit += profit = program_course.profit(@date)
+  %>
+    <tr>
+      <td><%= program_course.description %></td>
+      <td class="right"><%= number_to_currency revenue %></td>
+      <td class="right"><%= number_to_currency cost %></td>
+      <td class="right"><%= number_to_currency profit %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td class="right">Totaal</td>
+    <td class="right"><%= number_to_currency @revenue %></td>
+    <td class="right"><%= number_to_currency @cost %></td>
+    <td class="right"><%= number_to_currency @profit %></td>
+  </tr>
+</table>
+

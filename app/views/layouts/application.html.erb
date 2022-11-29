@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no,width=device-width">
+    <meta http-equiv="refresh" content="<%= 50.minutes %>">
+
+    <title>StudySquare: <%= content_for?(:title) ? yield(:title) : "Haal je tentamen!" %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag '/assets/favicon2.ico', :rel => 'shortcut icon' %>
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript">
+      var heap=heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
+      heap.load("276542529");
+    </script>
+  </head>
+  <body class="<%= yield :custom_class %>">
+
+  <!-- Facebook Like Button -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/nl_NL/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <!-- end button -->
+
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav">
+      <div class="inside-mobile-nav">
+
+        <div class="nav-title">StudySquare</div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><%= link_to "Studenten", "#{institutes_path}/student" %></li>
+          <li><a href="/scholieren">Scholieren</a></li>
+          <li><a href="/vacatures">Vacatures</a></li>
+          <li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div class="nav-title">Mijn Studysquare</div>
+        <% if current_user %>
+          <ul>
+            <% if current_user.role? :tutor %>
+              <%= render 'manager/menu' %>
+            <% else %>
+              <li><%= link_to "Mijn StudySquare", orders_path %></li>
+              <li><%= link_to "Rooster", timetable_path %></li>
+            <% end %>
+            <li><%= link_to "Instellingen", edit_user_registration_path %></li>
+          </ul>
+
+          <%= link_to "Uitloggen", destroy_user_session_path, method: :delete, class: 'mobile-nav-link' %>
+        <% else %>
+          <%= link_to "Inloggen", new_user_session_path, class: 'mobile-nav-link' %>
+          <%= link_to "Registreren", new_user_registration_path, class: 'mobile-nav-link' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="mobile-navbar navbar">
+      <a class="mobile-toggle btn btn-navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="mobile-logo"><%= image_tag "logo-white-dark.png" %></div>
+    </div>
+    <!-- /END MOBILE NAV -->
+
+		<div class="navbar-style">
+			<div class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container">
+
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</a>
+
+						<a class="pull-left logo" href="/"><%= image_tag "logo-white-dark.png" %></a>
+
+						<div class="nav-collapse collapse">
+							<div class="pull-right">
+								<ul class="nav">
+									<li class="<%= 'active_state' if @courses && params[:controller] != 'high_voltage/pages' && params[:controller] != 'manager/courses' %>"><%= link_to "Studenten", "#{institutes_path}/student" %></li>
+
+<!-- 									<li class="<%= 'active_state' if params[:id] == 'vacatures' %>"><a href="/vacatures">Vacatures</a></li> -->
+                  <li class="<%= 'active_state' if params[:id] == 'scholieren' %>"><a href="/scholieren">Scholieren</a></li>
+									<li class="<%= 'active_state' if params[:id] == 'veelgestelde-vragen' %>"><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li>
+									<li class="<%= 'active_state' if params[:id] == 'contact' %>"><a href="/contact">Contact</a></li>
+									<% if current_user %>
+                    <li class="ingelogd-btn"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.first_name %><span class="caret"></span></a>
+                      <div class="dropdown-menu">
+          						<% if current_user %>
+                        <ul>
+                          <% if current_user.role? :tutor %>
+                            <%= render 'manager/menu' %>
+                          <% else %>
+                            <li><%= link_to "Mijn StudySquare", orders_path, class: 'myss-icon' %></li>
+                            <li><%= link_to "Rooster", timetable_path, class: 'rooster-icon' %></li>
+                          <% end %>
+                          <li><%= link_to "Instellingen", edit_user_registration_path, class: 'settings-icon' %></li>
+                          <li><%= link_to "Uitloggen", destroy_user_session_path, method: :delete, class: 'logout-icon' %></li>
+                        </ul>
+                      <% end %>
+                      </div><!-- end user-menu -->
+                    </li>
+                    
+                  <% else %>
+                    <li><%= link_to "Inloggen", new_user_session_path, class: 'left-login login-icon' %></li>
+                    <li><%= link_to "Registreren", new_user_registration_path, class: 'left-register register-icon' %></li>
+                  <% end %>   
+								</ul>
+							</div>
+						</div><!--/.nav-collapse -->
+            
+					</div><!-- /container -->
+				</div>
+			</div>
+		</div>
+
+		<div class="left-menu">
+  		<% if current_user %>
+  		  <h1><%= current_user.first_name %></h1>
+  		<% else %>
+  		  <h1>Account</h1>
+  		<% end %>
+
+  		<div class="begin-border"></div>
+    		<% if current_user %>
+          <ul>
+            <% if current_user.role? :tutor %>
+              <%= render 'manager/menu' %>
+            <% else %>
+              <li><%= link_to "Mijn StudySquare", orders_path, class: 'myss-icon' %></li>
+              <li><%= link_to "Rooster", timetable_path, class: 'rooster-icon' %></li>
+            <% end %>
+            <li><%= link_to "Instellingen", edit_user_registration_path, class: 'settings-icon' %></li>
+          </ul>
+
+          <%= link_to "Uitloggen", destroy_user_session_path, method: :delete, class: 'logout-icon' %>
+        <% else %>
+          <%= link_to "Inloggen", new_user_session_path, class: 'left-login login-icon' %>
+          <%= link_to "Registreren", new_user_registration_path, class: 'left-register register-icon' %>
+        <% end %>
+        <div class="end-border"></div>
+		</div>
+    
+    <!-- home header-image -->
+    <div class="header-image">
+      <div class="holder clearfix">
+        <div class="holder-section pull-left">
+          <h2>Selecteer jouw Universiteit of Hogeschool</h2>
+          <div class="btn-group" id="institute">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="name">Universiteit/Hogeschool</span>
+              <span class="right-down"><span class="caret"></span></span>
+            </a>
+            <ul class="dropdown-menu">
+              <% Institute.where('institutes.level = ? OR institutes.level = ?', 'WO', 'HBO').each do |institute| %>
+                <li>
+                  <a href="#" data-faculties-path="<%= institute_faculties_path(institute) %>"><%= institute.name %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+         
+          <div class="btn-group" id="faculty">
+            <a class="btn dropdown-toggle disabled" data-toggle="dropdown">
+            <span class="name">Faculteit</span>
+            <span class="right-down"><span class="caret"></span></span>
+            </a>
+          </div>
+        </div>
+   
+        <div class="holder-section pull-right">
+          <h2>Selecteer jouw Middelbare School</h2>
+          <div class="btn-group" id="ms">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="name">Middelbare School</span>
+              <span class="right-down"><span class="caret"></span></span>
+            </a>
+            <ul class="dropdown-menu">
+              <% Institute.where('institutes.level = ?', 'MS').each do |institute| %>
+                <li>
+                  <a href="#" data-ms-path="<%= institute_faculties_path(institute) %>"><%= institute.name %></a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+         
+          <div class="btn-group" id="niveau">
+            <a class="btn dropdown-toggle disabled"  data-toggle="dropdown">
+            <span class="name">Niveau</span>
+            <span class="right-down"><span class="caret"></span></span>
+            </a>
+          </div>
+        </div>
+        
+      </div><!-- end holder -->
+    </div><!-- end header-home image -->
+    <div class="laatste-inschrijving">
+      <p>Al ruim 10.000 cursisten gingen je voor..</p>
+    </div>
+    
+		<div class="main-mobile-container">
+      <!-- Main Content -->
+      <div class="container main-container">
+
+        <%= bootstrap_flash %>
+
+        <%= yield %>
+
+      </div>
+
+      <footer>
+        <div class="container">
+            <div class="row-fluid">
+            
+              <div class="span4">
+                <a href="/" class="footer-logo"><%= image_tag "footer-logo-new.png" %></a>
+                <p>©2022 studysQuare</p>
+              </div>
+              <div class="span8">
+
+                <ul class="clearfix">
+									<li><a href="/vacatures">Vacatures</a></li>
+									<li><a href="/veelgestelde-vragen">Veelgestelde vragen</a></li>
+									<li><a href="/contact">Contact</a></li>
+									<li><a href="/algemenevoorwaarden.pdf">Algemene Voorwaarden</a></li>
+									<li><a class="facebook-footer" href="https://www.facebook.com/StudySquareAmsterdam"><%= image_tag "facebook-footer.png" %></a></li>
+                </ul>
+
+              </div>
+            </div>
+        </div>
+      </footer>
+
+      <div id="buffer" class="hidden"></div>
+
+    </div>
+
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "application" %>
+
+
+    <script>
+      // Google Analytics
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-25526114-8']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<%
+@courses ||= parent.courses
+@courses = @courses.visible.includes(:timeslots).sort_by(&:starts_at).uniq
+
+if current_user && current_user.respond_to?(:courses)
+  @user_courses = current_user.courses.visible
+  @courses -= @user_courses
+end
+
+title [@institute, @faculty, @faculty_program, @program_course].
+  compact.collect(&:name).join ' - '
+%>
+
+<% content_for :custom_class do %>cursus<% end %>
+
+<br><br><br>
+
+<div class="row-fluid">
+  <div>
+    <div class="subnav-cursus clearfix">
+      <div class="container">
+        <div class="row-fluid">
+          <div class="span10">
+            <ul class="subnavmenu">
+              <li class="first-zf">Zoekfilter:</li>
+              <li class="second-zf">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @institute ? @institute : filter_1 %> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <%= if params[:type] == 'student'
+                    render 'institutes/header_student' 
+                  elsif params[:type] == 'scholier'
+                    render 'institutes/header_scholier' 
+                  else 
+                    unless @institute.blank? 
+                      if  @institute.level == 'MS'
+                        render 'institutes/header_scholier' 
+                      else
+                        render 'institutes/header_student'  
+                      end
+                    end
+                  end %>
+                </ul>
+              </li>
+              <li>
+                <a href="#" class="dropdown-toggle <%= @institute ? '' : 'disabled' %>" data-toggle="dropdown"><%= @faculty ? @faculty : filter_2 %>  <span class="caret"></span></a>
+                <% if @institute %>
+                  <ul class="dropdown-menu">
+                    <%= render 'faculties/header' %>
+                  </ul>
+                <% end %>
+              </li>
+              <li>
+                <a href="#" class="dropdown-toggle <%= @faculty ? '' : 'disabled' %>" data-toggle="dropdown"><%= @faculty_program ? @faculty_program : filter_3 %>  <span class="caret"></span></a>
+                <% if @faculty %>
+                  <ul class="dropdown-menu">
+                    <%= render 'faculty_programs/header' %>
+                  </ul>
+                <% end %>
+              </li>
+              <li>
+                <a href="#" class="dropdown-toggle <%= @faculty_program ? '' : 'disabled' %>" data-toggle="dropdown"><%= @program_course ? @program_course : filter_4 %>  <span class="caret"></span></a>
+                <% if @faculty_program %>
+                  <ul class="dropdown-menu">
+                    <%= render 'program_courses/header' %>
+                  </ul>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /container -->
+    </div>
+
+    <!-- #OUDE FILTER
+      <ul class="main-list clearfix">
+        <li><a href="#"><%=raw @institute ? "<strong>#{@institute}</strong>" : "Universiteit" %> <i class="icon-white icon-plus"></i></a></li>
+        <li><a href="#"><%=raw @faculty ? "<strong>#{@faculty}</strong>" : "Faculteit" %> <i class="icon-white icon-plus"></i></a></li>
+        <li><a href="#"><%=raw @faculty_program ? "<strong>#{@faculty_program}</strong>" : "Opleiding" %> <i class="icon-white icon-plus"></i></a></li>
+        <li><a href="#"><%=raw @program_course ? "<strong>#{@program_course}</strong>" : "Vak" %> <i class="icon-white icon-plus"></i></a></li>
+      </ul>
+      <div class="dropdown-list clearfix">
+        <%= render 'header' %>
+      </div
+    >-->
+
+    <div class="mobile-filter">
+      <div class="dropdown mf-uni">
+        <a href="#" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+          <%=raw @institute ? "<strong>#{@institute}</strong>" : "Universiteit" %> <i class="icon-white icon-plus"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <%= render 'header' %>
+        </ul>
+      </div>
+
+      <div class="dropdown mf-fac">
+        <a href="#" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+          <%=raw @faculty ? "<strong>#{@faculty}</strong>" : "Faculteit" %> <i class="icon-white icon-plus"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <%= render 'header' %>
+        </ul>
+      </div>
+
+      <div class="dropdown mf-opl">
+        <a href="#" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+          <%=raw @faculty_program ? "<strong>#{@faculty_program}</strong>" : "Opleiding" %> <i class="icon-white icon-plus"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <%= render 'header' %>
+        </ul>
+      </div>
+
+      <div class="dropdown mf-vak">
+        <a href="#" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+          <%=raw @program_course ? "<strong>#{@program_course}</strong>" : "Vak" %> <i class="icon-white icon-plus"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <%= render 'header' %>
+        </ul>
+      </div>
+    </div><!-- end mobile filter -->
+
+    <br>
+
+    <%=raw "<p>Momenteel geen cursussen</p>" if @courses.empty? %>
+
+    <div class="cursus-overzicht">
+      <% if @user_courses.present? %>
+        <%= render @user_courses, user: current_user %>
+        <hr>
+      <% end %>
+
+      <%= render @courses %>
+    </div>
+  </div>
+
+  <!-- Winkelwagen -->
+
+  <div class="right-menu">
+
+      <div class="winkelwagen">
+        <%= render 'registrations/index' %>
+      </div>
+
+    </div>
+  </div>
+</div>
+

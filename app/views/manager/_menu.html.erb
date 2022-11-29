@@ -1,0 +1,11 @@
+<li class="admin-icon"><%= link_to "Administratie", rails_admin_path, { 'data-no-turbolink' => '' } if can? :access, :rails_admin %></li>
+
+<li><%= link_to "Rooster", timetable_path, class: 'rooster-icon' if current_user.type == "Tutor" %></li>
+<li><%= link_to "Overzicht", manager_courses_path, class: 'overzicht-icon' %></li>
+
+<li class="vakken-icon"><%= link_to "Inschrijvingen", manager_registrations_path if current_user.role? :manager %></li>
+<li class="vakken-icon"><%= link_to "Vakken", manager_program_courses_path if current_user.role? :manager %></li>
+<li class="tutoren-icon"><%= link_to "Tutoren", manager_tutors_path if can? :read, Tutor %></li>
+<li class="tutorial-icon"><%= link_to "Tutorial", '/manager/tutorial' if current_user.role? :manager %></li>
+<li class="handleiding-icon"><%= link_to "Handleiding", '/manager/handleiding' if current_user.role? :manager %></li>
+

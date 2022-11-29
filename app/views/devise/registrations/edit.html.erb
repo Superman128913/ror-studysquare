@@ -1,0 +1,17 @@
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <%= render 'form', f: f %>
+
+  <fieldset>
+    <legend>Wachtwoord</legend>
+    <%= f.input :password, hint: "Laat leeg als je je wachtwoord niet wilt veranderen" %>
+    <%= f.input :password_confirmation %>
+  </fieldset>
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Opslaan</button>
+</div>
+
+<% end %>
+

@@ -1,0 +1,6 @@
+was:
+  id: 3644
+  cart_course_ids: <%= Course.limit(1).pluck :id %>
+  customer: pepijn
+  coupon: in_use
+

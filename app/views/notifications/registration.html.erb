@@ -1,0 +1,23 @@
+<p style="font-weight:bold; color:#00aff0; font-size:15px; text-align:left;">Beste <%= @user.name %>,</p>
+
+<p>
+  Bedankt voor je bestelling!<br>
+  Hierbij ontvang je het bewijs van deelname voor de volgende cursus:<br>
+  <%= @course.description %>
+</p>
+
+<p>
+  Cursusmomenten:<br>
+  <% @course.timeslots.each do |ts| %>
+    <%= ts.description %> van <%= l ts.starts_at, format: :time %> tot <%= l ts.ends_at, format: :time %><%= ", " + ts.location unless ts.location.empty? %><br>
+  <% end %>
+<p>
+
+<p>
+  Je rooster is nadat je ingelogd bent in te zien via de website bij ‘Mijn Rooster’ en via de App. Mocht de locatie nog niet zichtbaar zijn dan komen deze uiterlijk een dag van te voren online. <br><br>
+  Like ons op facebook en maak kan op een gratis cursus naar keuze.
+</p>
+
+<p>Het StudySquare Team</p>
+
+

@@ -1,0 +1,17 @@
+<% content_for :custom_class do %>inloggen<% end %>
+
+<h2>Inloggen</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: 'form-vertical' }) do |f| %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" style="margin-bottom:5px;" class="btn btn-primary">Inloggen</button>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "Wachtwoord vergeten", new_user_password_path, style: 'font-size: 12px' %>
+

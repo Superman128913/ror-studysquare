@@ -1,0 +1,11 @@
+<%= simple_form_for [:manager, @message] do |f| %>
+  <%= f.hidden_field :messageable_id %>
+  <%= f.hidden_field :messageable_type %>
+
+  <%= f.input :subject %>
+  <%= f.input :body %>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">E-mail sturen</button>
+  </div>
+<% end %>

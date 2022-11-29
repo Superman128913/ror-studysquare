@@ -1,0 +1,3 @@
+<%= render 'scopes', collection: Institute.where(level: 'MS'),
+  url: lambda {|obj| [obj, :faculties] }, current: @institute %>
+

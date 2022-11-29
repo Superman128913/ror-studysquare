@@ -1,0 +1,84 @@
+<% user ||= nil %>
+<% cache [user, course].compact do %>
+  <div class="single-cursus">
+    <div id="course-<%= course.id %>" style="margin-top: -118px; position: absolute"></div>
+
+    <p class="cursus-soort pull-right">
+      <a href="return false" rel="popover" data-content="<%= course.course_type.description %>"
+        data-placement="top" title="<%= course.course_type.name %>"
+        onclick="return false" data-trigger="hover">
+        <%= course.course_type.name %>
+      </a>
+    </p>
+
+    <h4 style="margin-bottom:7px;">
+      <%= course.program_course.name %>
+      <%= "(Groep #{course.group})" if course.group && course.group.present? %>
+    </h4>
+    
+    <!-- <div class="clearfix"></div> -->
+    
+    <% if user %>
+      <div class="details-container">
+        <p class="details"><%= course.details %></p>
+        <div class="beschikbaarheid">
+          <strong>Ingeschreven</strong>
+        </div>
+      </div>
+    <% else %>
+      <div class="details-container clearfix">
+        <p class="details"><%= course.details %></p>
+        <div class="beschikbaarheid">
+        <% capacity = course.occupancy.split('/', 2)[1].to_f %>
+        <% available = course.occupancy.split('/', 2)[0].to_f %>
+        <% if available > capacity %>
+          Vol
+        <% else %>
+          <% if course.turbo %>
+            <% if capacity != available %>
+              <span class="allerlaatste_plaatsen">Allerlaatste plaatsen</span>
+            <% else %>
+              Vol
+            <% end %>
+          <% else %>
+            <% if available != 0 %>
+              <% percentage_occupied = available / capacity %>
+              <% if percentage_occupied == 1 %>
+                Vol
+              <% elsif percentage_occupied <= 0.25 %>
+                <span class="genoeg_plaats">Voldoende plaatsen</span>
+              <% elsif percentage_occupied > 0.25 and percentage_occupied <= 0.6 %>
+                <span class="bijna_vol">Bijna vol</span>
+              <% elsif percentage_occupied > 0.6 %>
+                <span class="allerlaatste_plaatsen">Allerlaatste plaatsen</span>
+              <% else %>
+                Vol
+              <% end %>
+            <% elsif capacity == available %>
+              Vol
+            <% else %>
+              <span class="genoeg_plaats">Voldoende plaatsen</span>
+            <% end %>
+          <% end %>
+        <% end %>
+       </div>
+      </div>
+      <div class="pull-right pricing-details">
+        <p style="text-align:right; float:left;" class="item_price"><%= number_to_currency course.price %> <%= ("<span>(betaling bij aanvang)</span>").html_safe if course.cash %></p>
+        <%= button_to "Bestellen", course_registration_path(course),
+          remote: true, class: 'pull-right btn btn-primary cart-order' if course.availability != :full %>
+      </div>
+    <% end %>
+    <div class="cursus-all-data clearfix pull-left">
+    <% course.timeslots.sort_by(&:starts_at).each do |timeslot| %>
+        <div class="cursus-data">
+          <p><%= l timeslot.starts_at, format: :date %></p>
+  
+          <p><%= l timeslot.starts_at, format: :time %> - <%= l timeslot.ends_at, format: :time %></p>
+        </div>
+    <% end %>
+    </div>
+  <div class="clearfix"></div>
+</div>
+<% end %>
+

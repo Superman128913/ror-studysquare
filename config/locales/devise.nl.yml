@@ -1,0 +1,57 @@
+nl:
+  errors:
+    messages:
+      expired: "is verlopen, vraag aub een nieuwe aan"
+      not_found: "niet gevonden"
+      already_confirmed: "is reeds bevestigd"
+      not_locked: "is niet gesloten"
+      not_saved:
+        one: "1 error zorgde dat %{resource} niet kon worden opgeslagen:"
+        other: "%{count} errors zorgen dat %{resource} niet kunnen worden opgeslagen:"
+
+  devise:
+    failure:
+      already_authenticated: 'Je bent al ingelogd.'
+      unauthenticated: 'Je dient in te loggen of je in te schrijven.'
+      unconfirmed: 'Je dient eerst je account te bevestigen.'
+      locked: 'Je account is gelocked.'
+      invalid: 'Ongeldig e-mail of wachtwoord.'
+      invalid_token: 'Invalide authenticiteit token.'
+      timeout: 'Je sessie is verlopen, log a.u.b. opnieuw in.'
+      inactive: 'Je account is nog niet geactiveerd.'
+      user:
+        not_found_in_database: 'Account niet gevonden'
+    sessions:
+      signed_in: 'Je bent succesvol ingelogd.'
+      signed_out: 'Je bent succesvol uitgelogd.'
+    passwords:
+      send_instructions: 'Je ontvangt via e-mail instructies hoe je je wachtwoord moet resetten.'
+      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je wachtwoord moet resetten.'
+      updated: 'Je wachtwoord is gewijzigd. Je bent nu ingelogd.'
+      updated_not_active: 'Je wachtwoord is gewijzigd.'
+    confirmations:
+      send_instructions: 'Je ontvangt via e-mail instructies hoe je je account kan bevestigen.'
+      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je account kan bevestigen.'
+      confirmed: 'Je account is bevestigd.'
+    registrations:
+      signed_up: 'Je bent inschreven.'
+      signed_up_but_unconfirmed: 'Een bevestigingsmail is naar je email adres gestuurd. Open aub de link in deze mail om je account te activeren.'
+      signed_up_but_inactive: 'Je bent ingeschreven. Je kunt echter nog niet inloggen omdat je account nog geactiveerd moet worden.'
+      signed_up_but_locked: 'Je bent ingeschreven, je kunt echter niet inloggen omdat je account gelocked is.'
+      update_needs_confirmation: "Je account is geupdate, maar we moeten je nieuwe emailadres verifieren. Controleer aub je email en klik op de link in de mail om te bevestigen."
+      updated: 'Je account gegevens zijn opgeslagen.'
+      destroyed: 'Je account is verwijderd, wellicht tot ziens!'
+    unlocks:
+      send_instructions: 'Je ontvangt via e-mail instructies hoe je je account kan unlocken.'
+      unlocked: 'Je account is ge-unlocked. Je kan nu weer inloggen.'
+      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je account kan unlocken.'
+    omniauth_callbacks:
+      success: 'Successvol aangemeld met je %{kind} account.'
+      failure: 'Kon je niet aanmelden met je %{kind} account, omdat "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Bevestiging'
+      reset_password_instructions:
+        subject: 'Wachtwoord resetten'
+      unlock_instructions:
+        subject: 'Unlock instructies'

@@ -1,0 +1,34 @@
+pepijn:
+  first_name: Pepijn
+  last_name: Looije
+  email: pepijnlooije@gmail.com
+  telephone: 0627379500
+  type: Customer
+
+  address_street: Nieuwe Prinsengracht
+  address_number: 110-2
+  address_zip: 1018 VX
+  address_residence: Amsterdam
+
+  institute: uva
+  faculty: feb
+  faculty_program: eeb
+  student_number: 10159711
+
+marlon:
+  first_name: Marlon
+  last_name: Sarra
+  email: marlon@sarra.nl
+  telephone: 06123456789
+  type: Admin
+
+  address_street: Vechtstraat
+  address_number: 1337
+  address_zip: 1337 XO
+  address_residence: Amsterdam
+
+  institute: uva
+  faculty: feb
+  faculty_program: eeb
+  student_number: 10159711
+

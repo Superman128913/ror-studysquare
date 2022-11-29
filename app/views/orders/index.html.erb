@@ -1,0 +1,52 @@
+<center><h1>Mijn StudySquare</h1></center>
+
+<% unless current_user.role? :tutor %>
+<div class="row-fluid clearfix">
+  <div class="span6 info-box">
+    <h5>Cursussen</h5>
+    <div class="inside-box">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Cursus</th>
+            <th class="right">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.courses.each do |course| %>
+            <tr>
+              <td><%= course.description(true) %></td>
+              <td class="right"><%= t course.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="span6 info-box">
+    <h5>Facturen</h5>
+    <div class="inside-box">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Factuurnummer</th>
+            <th>Datum</th>
+            <th class="right">Prijs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td>#<%= order.id %> (<%= link_to 'download', order, format: :pdf %>)</td>
+              <td><%= l order.created_at, format: :date %></td>
+              <td class="right"><%= number_to_currency order.total %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% end %>
+

@@ -1,0 +1,124 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+table td.right, table th.right { text-align: right }
+.timetable-box .inside-box { height: 300px }
+textarea#message_body {
+  width: 389px;
+  height: 250px;
+}
+
+.course-types {
+  border: 1px solid #e7e7e7;
+  margin-top: 10px;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  background: #f8f8f8;
+}
+
+.course-types ul {
+  margin: 0px;
+  border: 1px solid #fff;
+}
+
+.course-types ul li {
+  list-style: none;
+  padding: 7px;
+  border-bottom: 1px solid #e7e7e7;
+  border-top: 1px solid #fff;
+}
+
+.course-types ul li.first {
+  border-top: none;
+}
+
+.course-types ul li.last {
+  border-bottom: none;
+}
+
+.course-types ul li h4 {
+  margin: 0px;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.course-types ul li p {
+  margin: 8px 0px 0px 0px;
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.popover-content {
+  font-size: 14px;
+}
+
+.navbar-fixed-top {
+  z-index: 2000;
+}
+
+/* One-step Checkout*/
+.checkout-border {
+  border-right: 1px solid #ececec;
+}
+
+.checkout h2 {
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.control-group {
+  margin-bottom: 0px;
+}
+
+.checkout {
+  height: auto;
+}
+
+.checkout .span4 {
+  min-height: 100%;
+}
+
+.container {
+  width: 835px;
+}
+
+.checkout .table td {
+  padding: 8px 5px;
+}
+
+table {
+  table-layout: fixed;
+}
+
+td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#new_course label.checkbox {
+  width:30px;
+}
+
+.header-image .btn-group .btn span.name {
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(000,000,000,0.75);
+}
+
+.header-image .btn-group.open .btn span.name {
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+}

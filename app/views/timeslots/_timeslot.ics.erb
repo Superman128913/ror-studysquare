@@ -1,0 +1,11 @@
+<%=
+course = timeslot.course
+calendar.event do |ev|
+  ev.summary     course.program_course.description
+  ev.description course.course_type.name
+  ev.dtstart     timeslot.starts_at
+  ev.dtend       timeslot.ends_at
+  ev.location    timeslot.location if timeslot.location
+  #ev.url         institute_faculty_faculty_program_courses_url(course.institute, course.faculty, course.faculty_program, anchor: "course-#{course.id}")
+end
+%>

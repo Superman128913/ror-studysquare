@@ -1,0 +1,41 @@
+test:
+  code: TEST
+  amount: 12.34
+  kind: percentage
+  max_uses: 1
+
+gratis:
+  code: GRATIS
+  amount: 100
+  kind: percentage
+  max_uses: 1
+
+in_use:
+  code: INUSE
+  amount: 24
+  kind: percentage
+  max_uses: 1
+
+course_type:
+  code: COURSETYPE
+  amount: 50
+  kind: percentage
+  course_type: 2weekse
+
+program_course:
+  code: PROGRAMCOURSE
+  amount: 50
+  kind: percentage
+  program_courses: stat1
+
+expired:
+  code: EXPIRED
+  amount: 50
+  kind: percentage
+  expires_at: <%= Date.today - 1 %>
+
+cash:
+  code: CASH
+  amount: 20
+  kind: cash
+

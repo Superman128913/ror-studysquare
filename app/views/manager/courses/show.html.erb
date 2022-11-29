@@ -1,0 +1,51 @@
+<%= render 'header' %>
+
+<div class="row-fluid">
+  <div class="span6">
+    <%= simple_form_for [:manager, @course] do |f| %>
+      <% if @course.registrations.empty? %>
+        <h4 class="muted text-center">Wachtend op de eerste inschrijving :-)</h4>
+      <% else %>
+        <table class="registrations table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <label class="checkbox">
+                  <input checked="checked" id="course_registration_ids" type="checkbox">
+                  Iedereen (de)selecteren
+                </label>
+              </th>
+            </tr>
+          </thead>
+
+          <% @course.registrations.each do |registration| %>
+            <tr>
+              <td>
+
+                <label class="checkbox">
+                  <input checked="checked" name="course[registration_ids][]" type="checkbox" value="<%= registration.id %>">
+                  <span class="pull-right"><%= number_to_currency registration.price %></span>
+                  <strong><%= registration.customer %></strong><br>
+                  <span class="pull-right"><%= registration.customer.telephone %></span>
+                  <%= registration.customer.email %>
+                </label>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      <% end %>
+
+      <%= f.input :id, label_method: :description, label: "Ontvangende cursus#",
+        collection: @course.program_course.courses.order('id DESC').limit(10) %>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Klanten overplaatsen</button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="span6">
+    <%= render 'manager/messages/form' %>
+  </div>
+</div>
+

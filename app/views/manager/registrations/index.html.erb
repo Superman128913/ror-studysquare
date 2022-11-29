@@ -1,0 +1,33 @@
+<table id="manager-registrations" class="table">
+  <thead>
+    <tr>
+      <th style="width: 60px"><%= image_tag 'spinner.gif', title: "De lijst wordt automatisch vernieuwd" %></th>
+      <th style="width: 200px">Klant</th>
+      <th>Cursus</th>
+      <th class="right" style="width: 80px">Prijs</th>
+      <th class="right"></th>
+    </tr>
+  </thead>
+
+  <tr>
+    <td colspan="2"></td>
+    <td class="muted">Omzet laatste 7 dagen:</td>
+    <td class="right"><%= number_to_currency @revenue_last_week %></td>
+    <td></td>
+  </tr>
+
+  <% @registrations.each do |registration| %>
+    <tr>
+      <td><a href="/admin/registration/<%= registration.id %>">#<%= registration.id %></a></td>
+      <td><%= link_to registration.customer, "/admin/customer/#{registration.customer.id}" %></td>
+      <td><%= link_to_if registration.course, registration.course.try(:description), [:manager, registration.course] %></td>
+      <td class="right">
+        <abbr title="<%= registration.course.cash ? 'Betaling bij aanvang' : 'Vooraf betaald' if registration.course %>">
+          <%= link_to_if registration.order_id, number_to_currency(registration.price), order_path(registration.order_id || 0, :pdf), target: :_blank %>
+        </abbr>
+      </td>
+      <td class="right"><%= time_ago_in_words registration.created_at %> geleden</td>
+    </tr>
+  <% end %>
+</table>
+

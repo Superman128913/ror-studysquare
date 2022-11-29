@@ -1,0 +1,14 @@
+<div class="btn-group" id="faculty">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+  <span class="name">Faculteit</span>
+  <span class="right-down"><span class="caret"></span></span>
+  </a>
+  <ul class="dropdown-menu">
+    <% @institute.faculties.each do |faculty| %>
+      <li>
+        <%= link_to faculty.name, institute_faculty_faculty_programs_path(faculty.institute, faculty) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

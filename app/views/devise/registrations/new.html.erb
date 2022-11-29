@@ -1,0 +1,21 @@
+<div class="special-signup">
+<h2>Maak een nieuw account aan</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), class: 'form-vertical') do |f| %>
+  <%= f.error_notification %>
+
+  <%= render 'form', f: f %>
+
+  <fieldset>
+    <legend>Wachtwoord</legend>
+    <div class="inline clearfix">
+      <%= f.input :password %>
+      <div class="last"><%= f.input :password_confirmation %></div>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Aanmelden</button>
+  </div>
+<% end %>
+</div>
